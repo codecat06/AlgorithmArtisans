@@ -112,6 +112,100 @@ console.log(lookUpProfile("Sherlock","likes"));
 console.log(lookUpProfile("Sherlock","cars"));
 console.log(lookUpProfile("Robert","likes"));
 
+// destructuring assignment
+// quicker way to assign variables to some object's properties
+var voxel = {x: 3.6, y: 7.4, z: 6.54};
+const {x: a, y: b, z: c} = voxel; // a = 3.6, b = 7.4, c = 6.54
+
+// with nested objects:
+const LOCAL_FORECAST = {
+    today: {min: 72, max: 83},
+    tomorrow: {min: 73.3, max: 84.6}
+};
+const {tomorrow: {max: maxOfTomorrow}} = LOCAL_FORECAST;
+console.log(maxOfTomorrow); // 84.6
+
+// using destructuring to pass objects to functions
+const stats = {
+    max: 56.78,
+    standard_deviation: 4.34,
+    median: 34.54,
+    mode: 23.87,
+    min: -0.75,
+    average: 35.85
+};
+function half({max,min}){
+    return (max+min) / 2.0;
+}
+console.log(stats);
+console.log(half(stats));
+
+// putting functions inside objects
+const bicycle = {
+    gear: 2,
+    setGear(newGear){
+        this.gear = newGear;
+        return this.gear;
+    }
+};
+console.log(bicycle.setGear(3));
+
+// define constructor function
+var SpaceShuttle = function(targetPlanet){
+    this.targetPlanet = targetPlanet;
+};
+var zeus = new SpaceShuttle("Jupiter");
+console.log(zeus.targetPlanet);
+
+// with class syntax
+class SpaceShip{
+    constructor(targetPlanet) {
+        this.targetPlanet = targetPlanet;
+    }
+}
+zeus = new SpaceShip("Jupiter");
+console.log(zeus.targetPlanet);
+
+// getters and setters for classes
+class Book{
+    constructor(author) {
+        // _ means private variable
+        this._author = author;
+    }
+    // getter
+    get writer(){
+        return this._author;
+    }
+    // setter
+    set writer(updatedAuthor){
+        this._author = updatedAuthor;
+    }
+}
+
+function createClass(){
+    class Thermostat {
+        // accepting temp as F and turning it to C
+        constructor(temp) {
+            this._temp =  5/9 *(temp-32);
+        }
+        get temperature(){
+            return this._temp;
+        }
+        set temperature(updatedTemp){
+            this._temp = updatedTemp;
+        }
+    }
+    return Thermostat;
+}
+const Thermostat = createClass();
+const thermos = new Thermostat(76);
+let temp = thermos.temperature; // uses getter
+console.log(temp);
+thermos.temperature = 26; // uses setter
+temp = thermos.temperature;
+console.log(temp);
+
+
 
 
 
