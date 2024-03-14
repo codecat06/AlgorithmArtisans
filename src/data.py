@@ -1,79 +1,105 @@
 from opensky_api import OpenSkyApi
-import ast
 import json
-
-api = OpenSkyApi()
-states = api.get_states()
+import time
 
 
-# with open("planes.txt", "a") as fo:
-#     for s in states.states:
-#         # converting state data to dictionary format
-#         s_dict = {
-#             'baro_altitude': s.baro_altitude,
-#             'callsign': s.callsign,
-#             'category': s.category,
-#             'geo_altitude': s.geo_altitude,
-#             'icao24': s.icao24,
-#             'last_contact': s.last_contact,
-#             'latitude': s.latitude,
-#             'longitude': s.longitude,
-#             'on_ground': s.on_ground,
-#             'origin_country': s.origin_country,
-#             'position_source': s.position_source,
-#             'sensors': s.sensors,
-#             'spi': s.spi,
-#             'squawk': s.squawk,
-#             'time_position': s.time_position,
-#             'true_track': s.true_track,
-#             'velocity': s.velocity,
-#             'vertical_rate': s.vertical_rate
-#         }
-#         # each line consists all information about one plane
-#         json.dump(s_dict, fo)
-#         fo.write('\n')
+def fetch_planes_data():
+    api = OpenSkyApi()
+    states = api.get_states()
+    planes_data = []
+    for s in states.states:
+        s_dict = {
+            'baro_altitude': s.baro_altitude,
+            'callsign': s.callsign,
+            'category': s.category,
+            'geo_altitude': s.geo_altitude,
+            'icao24': s.icao24,
+            'last_contact': s.last_contact,
+            'latitude': s.latitude,
+            'longitude': s.longitude,
+            'on_ground': s.on_ground,
+            'origin_country': s.origin_country,
+            'position_source': s.position_source,
+            'sensors': s.sensors,
+            'spi': s.spi,
+            'squawk': s.squawk,
+            'time_position': s.time_position,
+            'true_track': s.true_track,
+            'velocity': s.velocity,
+            'vertical_rate': s.vertical_rate
+        }
+        planes_data.append(s_dict)
+    return planes_data
 
 
+def save_planes_data_to_file(filename):
+    planes_data = fetch_planes_data()
+    with open(filename, "a") as fo:
+        for plane_data in planes_data:
+            json.dump(plane_data, fo)
+            fo.write('\n')
 
-# reading the file to find the data matching the callsign
-callsign_data = {}
-lines_by_number = {}
 
-with open("planes.txt", "r") as fo:
-    for idx, line in enumerate(fo, start=1):
-        try:
-            plane_info = json.loads(line.strip())
-        except json.JSONDecodeError:
-            print(f"Skipping line {idx} due to JSONDecodeError: {line.strip()}")
-            continue
-        callsign = plane_info.get('callsign')
-        if callsign not in callsign_data:
-            callsign_data[callsign] = []
-        callsign_data[callsign].append(idx)
-        lines_by_number[idx] = line.strip()
+def load_planes_data_from_file(filename):
+    planes_data = []
+    with open(filename, "r") as fo:
+        for line in fo:
+            try:
+                plane_info = json.loads(line.strip())
+            except json.JSONDecodeError:
+                continue
+            planes_data.append(plane_info)
+    return planes_data
 
-# printing the line numbers of matching callsign
-matching_callsign = "EZY46PF"
-matching_line_numbers = []
-for callsign, line_numbers in callsign_data.items():
-    if callsign.strip() == matching_callsign.strip():
-        matching_line_numbers.append(line_numbers)
-        print(f"Callsign: {callsign}, Line Numbers: {line_numbers}")
 
-matching_lines = []
-# printing the lines that contains the matching callsign
-with open("planes.txt", "r") as fo:
-    for idx, line in enumerate(fo, start=1):
-        if idx in matching_line_numbers.__getitem__(0):
-            matching_lines.append(line)
-            print(line)
+def find_matching_callsign_data(planes_data, callsign):
+    matching_data = []
+    for plane_data in planes_data:
+        if plane_data.get('callsign', '').strip() == callsign.strip():
+            matching_data.append(plane_data)
+    return matching_data
 
-# printing the wanted properties with given lines
-for line in matching_lines:
-    data_dict = json.loads(line)
-    print(f"baro_altitude: {data_dict['baro_altitude']}")
-    print(f"category: {data_dict['category']}")
-    print(f"geo_altitude: {data_dict['geo_altitude']}")
+
+def print_matching_callsign_data(matching_data):
+    for data in matching_data:
+        print(f"baro_altitude: {data['baro_altitude']}")
+        print(f"category: {data['category']}")
+        print(f"icao24: {data['icao24']}")
+        print(f"last_contact: {data['last_contact']}")
+        print(f"latitude: {data['latitude']}")
+        print(f"longitude: {data['longitude']}")
+        print(f"on_ground: {data['on_ground']}")
+        print(f"origin_country: {data['origin_country']}")
+        print(f"position_source: {data['position_source']}")
+        print(f"sensors: {data['sensors']}")
+        print(f"spi: {data['spi']}")
+        print(f"squawk: {data['squawk']}")
+        print(f"time_position: {data['time_position']}")
+        print(f"true_track: {data['true_track']}")
+        print(f"velocity: {data['velocity']}")
+        print(f"vertical_rate: {data['vertical_rate']}")
+        print("")
+
+
+# # initial planes.txt
+# save_planes_data_to_file("planes.txt")
+# time.sleep(10)
+# save_planes_data_to_file("planes.txt")
+# time.sleep(10)
+# save_planes_data_to_file("planes.txt")
+# time.sleep(10)
+# save_planes_data_to_file("planes.txt")
+# time.sleep(10)
+# save_planes_data_to_file("planes.txt")
+
+
+# printing all properties of given lines
+planes_data = load_planes_data_from_file("planes.txt")
+matching_callsign = "SWA3313"
+matching_data = find_matching_callsign_data(planes_data, matching_callsign)
+print_matching_callsign_data(matching_data)
+
+
 
 
 
