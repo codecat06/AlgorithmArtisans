@@ -6,21 +6,34 @@ body {
 }
 
 header {
-    background-color: #333;
-    color: #fff;
+    background-color: #762727;
+    color: #f8f0f0;
     text-align: center;
     padding: 20px 0;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header strong {
+    font-weight: bold;
 }
 
 main {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 60vh; /* Adjusted height */
 }
 
 .plane-selection {
     width: 300px;
+}
+
+.select-plane {
+    font-size: 18px; /* Adjusted font size */
+    margin-top: 0;
 }
 
 #planeInput {
@@ -46,4 +59,18 @@ main {
 
 #planeList li:hover {
     background-color: #e5e5e5;
+}
+
+footer {
+    background-color: #ba1b1b;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #fff;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+.group-name {
+    font-size: 24px; /* Adjusted font size */
 }
