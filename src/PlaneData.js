@@ -34,6 +34,13 @@ function loadPlanesDataFromFile(filename) {
 function findMatchingCallsignData(planesData, callsign) {
     return planesData.filter(planeData => planeData.callsign.trim() === callsign.trim());
 }
+function findCallsigns(planesData) {
+    const callsigns = new Set();
+    planesData.forEach(planeData => {
+        callsigns.add(planeData.callsign.trim());
+    });
+    return [...callsigns];
+}
 
 function printMatchingCallsignData(matchingData) {
     matchingData.forEach(data => {
@@ -71,6 +78,11 @@ loadPlanesDataFromFile('planes.txt')
     .catch(err => {
         console.error('Error loading planes data:', err);
     });
+
+loadPlanesDataFromFile("planes.txt").then(planesData => {
+    const callsigns = findCallsigns(planesData);
+    console.log(callsigns);
+});
 
 
 
