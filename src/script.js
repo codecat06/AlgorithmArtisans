@@ -1,4 +1,5 @@
 let callsigns;
+var selectedCallsign = "NOT SELECTED";
 // script.js
 const planes = [
     { name: "Boeing 737", id: 1 },
@@ -37,6 +38,7 @@ function displayCallsigns(callsignsToShow) {
         planeList.appendChild(li);
     });
 }
+
 // Function to display filtered planes
 function displayPlanes(planesToShow) {
     planeList.innerHTML = '';
@@ -52,13 +54,25 @@ function displayPlanes(planesToShow) {
 planeInput.addEventListener('input', filterCallsigns);
 
 // Event listener for plane selection
-/*planeList.addEventListener('click', (event) => {
-    const selectedPlaneId = event.target.getAttribute('data-id');
+planeList.addEventListener('click', (event) => {
+    selectedCallsign = event.target.textContent;
+    printOnScreen(selectedCallsign);
+    /*const selectedPlaneId = event.target.getAttribute('data-id');
     if (selectedPlaneId) {
         // Redirect to the page with selected plane data
         window.location.href = `plane-info.html?id=${selectedPlaneId}`;
-    }
-});*/
+    }*/
+});
+// Get the output div element
+const outputDiv = document.getElementById('output');
+
+// Function to print content on the screen
+function printOnScreen(content) {
+    // Set the content of the output div
+    outputDiv.textContent = content;
+}
+
+// Call the function to print something on the screen
 
 // Initial display of all planes
 
