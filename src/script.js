@@ -57,6 +57,7 @@ planeInput.addEventListener('input', filterCallsigns);
 planeList.addEventListener('click', (event) => {
     selectedCallsign = event.target.textContent;
     printOnScreen(selectedCallsign);
+    planeInput.placeholder = `${selectedCallsign}`;
     /*const selectedPlaneId = event.target.getAttribute('data-id');
     if (selectedPlaneId) {
         // Redirect to the page with selected plane data
