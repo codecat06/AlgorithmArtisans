@@ -1,40 +1,19 @@
-const fs = require('fs');
-const readline = require('readline');
+export async function loadPlanesDataFromFile(filename) {
 
-function loadPlanesDataFromFile(filename) {
-    return new Promise((resolve, reject) => {
-        const planesData = [];
-        const inputStream = fs.createReadStream(filename, 'utf8');
-        const rl = readline.createInterface({
-            input: inputStream,
-            crlfDelay: Infinity
-        });
-
-        rl.on('line', (line) => {
-            try {
-                const jsonData = JSON.parse(line);
-                planesData.push(jsonData);
-            } catch (error) {
-                console.error('Error parsing JSON:', error);
-            }
-        });
-
-        rl.on('close', () => {
-            //console.log('File processed.');
-            resolve(planesData);
-        });
-
-        rl.on('error', (err) => {
-            console.error('Error reading file:', err);
-            reject(err);
-        });
-    });
+    const response = await fetch(filename);
+  
+    const text = await response.text();
+  
+    const planesData = text.split('\n').filter(line => line.trim().length > 0).map(JSON.parse);
+  
+    return planesData;
+  
 }
 
-function findMatchingCallsignData(planesData, callsign) {
+export function findMatchingCallsignData(planesData, callsign) {
     return planesData.filter(planeData => planeData.callsign.trim() === callsign.trim());
 }
-function findCallsigns(planesData) {
+export function findCallsigns(planesData) {
     const callsigns = new Set();
     planesData.forEach(planeData => {
         callsigns.add(planeData.callsign.trim());
@@ -42,7 +21,7 @@ function findCallsigns(planesData) {
     return [...callsigns];
 }
 
-function printMatchingCallsignData(matchingData) {
+export function printMatchingCallsignData(matchingData) {
     matchingData.forEach(data => {
         console.log(`baro_altitude: ${data.baro_altitude}`);
         console.log(`category: ${data.category}`);
@@ -79,10 +58,8 @@ loadPlanesDataFromFile('planes.txt')
         console.error('Error loading planes data:', err);
     });
 
-loadPlanesDataFromFile("planes.txt").then(planesData => {
+loadPlanesDataFromFile("planes.txt")
+.then(planesData => {
     const callsigns = findCallsigns(planesData);
     console.log(callsigns);
 });
-
-
-
