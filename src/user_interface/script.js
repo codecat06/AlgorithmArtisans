@@ -1,4 +1,4 @@
-import { loadPlanesDataFromFile, findCallsigns, findMatchingCallsignData, printMatchingCallsignData } from'./PlaneData.js'
+import { loadPlanesDataFromFile, findCallsigns, findMatchingCallsignData, printMatchingCallsignData } from '../data_retrieving/PlaneData.js'
 
 let callsigns;
 var selectedCallsign = "NOT SELECTED";
@@ -87,7 +87,7 @@ function printOnScreen(content) {
 
 
 // Usage: Load the data from file and process it
-loadPlanesDataFromFile('planes.txt')
+loadPlanesDataFromFile('../data_retrieving/planes.txt')
     .then(planesData => {
         callsign = 'N6545H'; // Example callsign to search for
         const matchingData = findMatchingCallsignData(planesData, callsign);
@@ -98,7 +98,7 @@ loadPlanesDataFromFile('planes.txt')
         console.error('Error loading planes data:', err);
     });
 
-loadPlanesDataFromFile("planes.txt")
+loadPlanesDataFromFile("../data_retrieving/planes.txt")
 .then(planesData => {
     callsigns = findCallsigns(planesData);
     //console.log(callsigns);
