@@ -57,12 +57,12 @@ main {
     background-color: #f9f9f9;
     border-bottom: 1px solid #ccc;
     cursor: pointer;
-    
+
 }
 
 #planeList li:hover {
     background-color: #e5e5e5;
-    
+
 }
 
 footer {
@@ -77,4 +77,54 @@ footer {
 
 .group-name {
     font-size: 24px; /* Adjusted font size */
+}
+
+.graph-selection {
+    width: 300px;
+    position: fixed;
+    bottom: 20px;
+    left: calc(75% + 10px); /* Adjust as needed */
+    transform: translateX(-50%);
+}
+
+.select-graph{
+    font-size: 18px; /* Adjusted font size */
+    margin-top: 0;
+}
+
+#graphInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#graphList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    height: 200px; /* Set a fixed height */
+    overflow-y: scroll; /* Add vertical scroll */
+}
+
+#graphList li {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+
+}
+
+#graphList li:hover {
+    background-color: #e5e5e5;
+
+}
+
+#output, #output2 {
+    display: 0; /* Initially hide the divs */
+    width: 50%;
+    vertical-align: top;
+    padding: 5px;
+    box-sizing: border-box;
 }
