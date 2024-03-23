@@ -51,7 +51,7 @@ export function printMatchingCallsignData(matchingData) {
 
 // returns an array that contains the valid properties that can be converted to a graph
 // of a given matchingData
-function getValidProperties(matchingData){
+export function getValidProperties(matchingData){
     const result = new Set();
     matchingData.forEach(data => {
         if(data.baro_altitude !== null){
@@ -88,7 +88,7 @@ function getValidProperties(matchingData){
 * */
 
 // returns an array that contains the baro_altitude values in the matching data
-function getBaroAltitude(matchingData){
+export function getBaroAltitude(matchingData){
     const result = [];
     matchingData.forEach(data => {
         result.push(Number(data.baro_altitude));
@@ -97,7 +97,7 @@ function getBaroAltitude(matchingData){
 }
 
 // returns an array that contains the callsign values in the matching data
-function getCallsign(matchingData){
+export function getCallsign(matchingData){
     const result = [];
     matchingData.forEach(data => {
         result.push(data.callsign);
@@ -106,7 +106,7 @@ function getCallsign(matchingData){
 }
 
 // returns an array that contains the category values in the matching data
-function getCategory(matchingData){
+export function getCategory(matchingData){
     const result = [];
     matchingData.forEach(data => {
         result.push(Number(data.category));
@@ -115,7 +115,7 @@ function getCategory(matchingData){
 }
 
 // returns an array that contains the geo_altitude values in the matching data
-function getGeoAltitude(matchingData){
+export function getGeoAltitude(matchingData){
     const result = [];
     matchingData.forEach(data => {
         result.push(Number(data.geo_altitude));
@@ -124,7 +124,7 @@ function getGeoAltitude(matchingData){
 }
 
 // returns an array that contains the icao24 values in the matching data
-function getIcao(matchingData){
+export function getIcao(matchingData){
     const result = [];
     matchingData.forEach(data => {
         result.push(data.icao24);
@@ -133,7 +133,7 @@ function getIcao(matchingData){
 }
 
 // returns an array that contains the last_contact values in the matching data
-function getLastContact(matchingData){
+export function getLastContact(matchingData){
     const result = [];
     matchingData.forEach(data => {
         result.push(Number(data.last_contact));
@@ -142,7 +142,7 @@ function getLastContact(matchingData){
 }
 
 // returns an array that contains the latitude values in the matching data
-function getLatitude(matchingData){
+export function getLatitude(matchingData){
     const result = [];
     matchingData.forEach(data => {
         result.push(Number(data.latitude));
@@ -151,7 +151,7 @@ function getLatitude(matchingData){
 }
 
 // returns an array that contains the longitude values in the matching data
-function getLongitude(matchingData){
+export function getLongitude(matchingData){
     const result = [];
     matchingData.forEach(data => {
         result.push(Number(data.longitude));
@@ -160,7 +160,7 @@ function getLongitude(matchingData){
 }
 
 // returns an array that contains the on_ground values in the matching data
-function getOnGround(matchingData){
+export function getOnGround(matchingData){
     const result = [];
     matchingData.forEach(data => {
         result.push(data.on_ground);
@@ -169,7 +169,7 @@ function getOnGround(matchingData){
 }
 
 // returns the origin_country value in the matching data
-function getOriginCountry(matchingData){
+export function getOriginCountry(matchingData){
     const result = [];
     matchingData.forEach(data => {
         result.push(data.origin_country);
@@ -178,7 +178,7 @@ function getOriginCountry(matchingData){
 }
 
 // returns an array that contains the position_source values in the matching data
-function getPositionSource(matchingData){
+export function getPositionSource(matchingData){
     const result = [];
     matchingData.forEach(data => {
         result.push(Number(data.position_source));
@@ -187,7 +187,7 @@ function getPositionSource(matchingData){
 }
 
 // returns an array that contains the sensors values in the matching data
-function getSensors(matchingData){
+export function getSensors(matchingData){
     const result = [];
     matchingData.forEach(data => {
         result.push(data.sensors);
@@ -196,7 +196,7 @@ function getSensors(matchingData){
 }
 
 // returns an array that contains the spi values in the matching data
-function getSpi(matchingData){
+export function getSpi(matchingData){
     const result = [];
     matchingData.forEach(data => {
         result.push(data.spi);
@@ -205,7 +205,7 @@ function getSpi(matchingData){
 }
 
 // returns an array that contains the squawk values in the matching data
-function getSquawk(matchingData){
+export function getSquawk(matchingData){
     const result = [];
     matchingData.forEach(data => {
         result.push(data.squawk);
@@ -214,7 +214,7 @@ function getSquawk(matchingData){
 }
 
 // returns an array that contains the time_position values in the matching data
-function getTimePosition(matchingData){
+export function getTimePosition(matchingData){
     const result = [];
     matchingData.forEach(data => {
         result.push(Number(data.time_position));
@@ -223,7 +223,7 @@ function getTimePosition(matchingData){
 }
 
 // returns an array that contains the true_track values in the matching data
-function getTrueTrack(matchingData){
+export function getTrueTrack(matchingData){
     const result = [];
     matchingData.forEach(data => {
         result.push(Number(data.true_track));
@@ -232,7 +232,7 @@ function getTrueTrack(matchingData){
 }
 
 // returns an array that contains the velocity values in the matching data
-function getVelocity(matchingData){
+export function getVelocity(matchingData){
     const result = [];
     matchingData.forEach(data => {
         result.push(Number(data.velocity));
@@ -241,7 +241,7 @@ function getVelocity(matchingData){
 }
 
 // returns an array that contains the vertical_rate values in the matching data
-function getVerticalRate(matchingData){
+export function getVerticalRate(matchingData){
     const result = [];
     matchingData.forEach(data => {
         result.push(Number(data.vertical_rate));
