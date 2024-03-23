@@ -1,12 +1,29 @@
-import { loadPlanesDataFromFile, findCallsigns, findMatchingCallsignData, printMatchingCallsignData, getGeoAltitude} from '../data_retrieving/PlaneData.js'
+import { loadPlanesDataFromFile, findCallsigns, findMatchingCallsignData, printMatchingCallsignData, getGeoAltitude, getValidProperties} from '../data_retrieving/PlaneData.js'
 
 let callsigns;
+let planesData_tmp;
+let validProperties;
 let xabab;
 let xababArrayString;
 let selectedCallsign = "NOT SELECTED";
 let selectedGraph = "NOT SELECTED";
 // script.js
-const graphs = [
+loadPlanesDataFromFile("../data_retrieving/planes.txt")
+    .then(planesData => {
+        planesData_tmp = planesData;
+        callsigns = findCallsigns(planesData);
+
+        xabab = [15,15,15,15,5,9];
+        xababArrayString = JSON.stringify(xabab);
+        //xabab = getGeoAltitude(findMatchingCallsignData(planesData, selectedCallsign));
+        //xaba = getGeoAltitude(findMatchingCallsignData(planesData, selectedCallsign));
+        //console.log(callsigns);
+        //displayPlanes(callsigns);
+        displayCallsigns(callsigns);
+        displayGraphsSelection(validProperties);
+        //filterCallsigns(planeInput);
+    })
+let graphs = [
     { name: "Baro Altitude-time", id: 1 },
     { name: "Geo Altitude-time", id: 2 },
     { name: "Latitude-time", id: 3 },
@@ -24,15 +41,19 @@ const planeList = document.getElementById('planeList');
 const graphInput = document.getElementById('graphInput');
 const graphList = document.getElementById('graphList');
 
+
 // Function to filter planes based on user input
 function filterCallsigns() {
     const searchTerm = planeInput.value.trim().toUpperCase(); // Convert search term to uppercase for case-insensitive comparison
     const filteredCallsigns = callsigns.filter(callsign => callsign.toUpperCase().includes(searchTerm));
     displayCallsigns(filteredCallsigns);
 }
+function filterGraphsBasedOnCallSigns(){
+    graphs = validProperties;
+}
 function filterGraphs() {
     const searchTerm = graphInput.value.trim().toUpperCase(); // Retrieve the value from the input field and convert it to uppercase
-    const filteredGraphs = graphs.filter(graph => graph.name.toUpperCase().includes(searchTerm));
+    const filteredGraphs = validProperties.filter(property => property.toUpperCase().includes(searchTerm));
     displayGraphsSelection(filteredGraphs); // Call the function to display the filtered graphs
 }
 // Function to display filtered callsigns
@@ -44,12 +65,12 @@ function displayCallsigns(callsignsToShow) {
         planeList.appendChild(li);
     });
 }
-function displayGraphsSelection(graphs) {
+function displayGraphsSelection(validProperties) {
     graphList.innerHTML = ''; // Clear the previous content of graphList
-    graphs.forEach(graph => {
+    validProperties.forEach(property => {
         const li = document.createElement('li');
-        li.textContent = graph.name; // Display the name of the graph
-        li.setAttribute('data-id', graph.id); // Set the data-id attribute to the graph's id
+        li.textContent = property; // Display the name of the graph
+
         graphList.appendChild(li); // Append the list item to the graphList
     });
 }
@@ -62,6 +83,8 @@ planeList.addEventListener('click', (event) => {
     selectedCallsign = event.target.textContent;
     printOnScreen(selectedCallsign);
     planeInput.placeholder = `${selectedCallsign}`;
+    validProperties = getValidProperties(findMatchingCallsignData(planesData_tmp, selectedCallsign));
+    displayGraphsSelection(validProperties);
     /*const selectedPlaneId = event.target.getAttribute('data-id');
     if (selectedPlaneId) {
         // Redirect to the page with selected plane data
@@ -132,20 +155,7 @@ function printOnScreen2(content) {
 
 
 // Usage: Load the data from file and process it
-loadPlanesDataFromFile("../data_retrieving/planes.txt")
-    .then(planesData => {
-        callsigns = findCallsigns(planesData);
-        console.log("Planes data:", planesData);
-        xabab = [15,15,15,15,5,9];
-        xababArrayString = JSON.stringify(xabab);
-        //xabab = getGeoAltitude(findMatchingCallsignData(planesData, selectedCallsign));
-        //xaba = getGeoAltitude(findMatchingCallsignData(planesData, selectedCallsign));
-        //console.log(callsigns);
-        //displayPlanes(callsigns);
-        displayCallsigns(callsigns);
-        displayGraphsSelection(graphs);
-        //filterCallsigns(planeInput);
-    })
+
 
 const button = document.getElementById('upperButton');
 
