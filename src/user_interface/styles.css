@@ -128,3 +128,14 @@ footer {
     padding: 5px;
     box-sizing: border-box;
 }
+
+.button{
+
+    position: fixed;
+    bottom: 250px;
+    right: 0;
+    width: 150px; /* Set the width of the button */
+    height: 50px; /* Set the height of the button */
+    font-size: 100px; /* Set the font size of the button text */
+
+}
