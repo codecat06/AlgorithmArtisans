@@ -1,8 +1,10 @@
-import { loadPlanesDataFromFile, findCallsigns, findMatchingCallsignData, printMatchingCallsignData } from '../data_retrieving/PlaneData.js'
+import { loadPlanesDataFromFile, findCallsigns, findMatchingCallsignData, printMatchingCallsignData, getGeoAltitude} from '../data_retrieving/PlaneData.js'
 
 let callsigns;
-var selectedCallsign = "NOT SELECTED";
-var selectedGraph = "NOT SELECTED";
+let xabab;
+let xababArrayString;
+let selectedCallsign = "NOT SELECTED";
+let selectedGraph = "NOT SELECTED";
 // script.js
 const graphs = [
     { name: "Baro Altitude-time", id: 1 },
@@ -91,16 +93,67 @@ function printOnScreen2(content) {
     output2Div.textContent = content;
 }
 
+
+/*function displayGraph(selectedCallsign, selectedGraph){
+
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line', // Change this to the type of chart you want (bar, line, pie, etc.)
+        data: {
+            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+            datasets: [{
+                label: 'x',
+                data: [12, 19, 3, 5, 2, 3, 9, 20, 15, 16],
+                backgroundColor: [
+                    'black'
+                ],
+                borderColor: 'black',
+                borderWidth: 4
+
+            }]
+
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+
+}*/
+
+
+
+
+
+
 // Usage: Load the data from file and process it
 loadPlanesDataFromFile("../data_retrieving/planes.txt")
     .then(planesData => {
         callsigns = findCallsigns(planesData);
+        console.log("Planes data:", planesData);
+        xabab = [15,15,15,15,5,9];
+        xababArrayString = JSON.stringify(xabab);
+        //xabab = getGeoAltitude(findMatchingCallsignData(planesData, selectedCallsign));
+        //xaba = getGeoAltitude(findMatchingCallsignData(planesData, selectedCallsign));
         //console.log(callsigns);
         //displayPlanes(callsigns);
         displayCallsigns(callsigns);
         displayGraphsSelection(graphs);
         //filterCallsigns(planeInput);
     })
-    .then(() => {
-        //
-    });
+
+const button = document.getElementById('upperButton');
+
+// Add a click event listener to the button
+button.addEventListener('click', () => {
+    // Change the window location to the new HTML file
+    //displayGraph(selectedCallsign, selectedGraph);
+
+    window.location.href = `GoToGraph.html?selectedGraph=${selectedGraph}&xabab=${xababArrayString}&selectedCallSign=${selectedCallsign}`;
+    createChart(selectedGraph);
+});
