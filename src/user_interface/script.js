@@ -1,4 +1,4 @@
-import { loadPlanesDataFromFile, findCallsigns, findMatchingCallsignData, printMatchingCallsignData, getGeoAltitude, getValidProperties} from '../data_retrieving/PlaneData.js'
+import allFunctions from '../data_retrieving/PlaneData.js'
 
 let callsigns;
 let planesData_tmp;
@@ -8,10 +8,10 @@ let xababArrayString;
 let selectedCallsign = "NOT SELECTED";
 let selectedGraph = "NOT SELECTED";
 // script.js
-loadPlanesDataFromFile("../data_retrieving/planes.txt")
+allFunctions.loadPlanesDataFromFile("../data_retrieving/planes.txt")
     .then(planesData => {
         planesData_tmp = planesData;
-        callsigns = findCallsigns(planesData);
+        callsigns = allFunctions.findCallsigns(planesData);
 
         xabab = [15,15,15,15,5,9];
         xababArrayString = JSON.stringify(xabab);
@@ -83,7 +83,7 @@ planeList.addEventListener('click', (event) => {
     selectedCallsign = event.target.textContent;
     printOnScreen(selectedCallsign);
     planeInput.placeholder = `${selectedCallsign}`;
-    validProperties = getValidProperties(findMatchingCallsignData(planesData_tmp, selectedCallsign));
+    validProperties = allFunctions.getValidProperties(allFunctions.findMatchingCallsignData(planesData_tmp, selectedCallsign));
     displayGraphsSelection(validProperties);
     /*const selectedPlaneId = event.target.getAttribute('data-id');
     if (selectedPlaneId) {
