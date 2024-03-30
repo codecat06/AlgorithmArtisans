@@ -1,4 +1,3 @@
-
 export default {
     loadPlanesDataFromFile,
     findMatchingCallsignData,
@@ -83,25 +82,25 @@ function getValidProperties(matchingData){
     const result = new Set();
     matchingData.forEach(data => {
         if(data.baro_altitude !== null){
-            result.add("baro_altitude");
+            result.add("Baro Altitude - Time");
         }
         if(data.geo_altitude !== null){
-            result.add("geo_altitude");
+            result.add("Geo Altitude - Time");
         }
         if(data.latitude !== null){
-            result.add("latitude");
+            result.add("Latitude - Time");
         }
         if(data.longitude !== null){
-            result.add("longitude");
+            result.add("Longitude - Time");
         }
         if(data.true_track !== null){
-            result.add("true_track");
+            result.add("True Track - Time");
         }
         if(data.velocity !== null){
-            result.add("velocity");
+            result.add("Velocity - Time");
         }
         if(data.vertical_rate !== null){
-            result.add("vertical_rate");
+            result.add("Vertical Rate - Time");
         }
     });
     return [...result];
