@@ -1,6 +1,8 @@
 import allFunctions from '../data_retrieving/PlaneData.js'
 function createChart(selectedGraph, matchingData) {
+    var yAxisText;
     var ctx = document.getElementById('myChart').getContext('2d');
+    
     var chartData = {
         labels: [],
         datasets: [{
@@ -17,42 +19,49 @@ function createChart(selectedGraph, matchingData) {
         chartData.labels = Array.from({ length: data_array.length }, (_, i) => (i*10).toString());
         chartData.datasets[0].label = "Baro Altitude - Time";
         chartData.datasets[0].data = data_array;
+        yAxisText = "Baro Altitude";
     }
     else if(selectedGraph === "Geo Altitude - Time"){
         const data_array = allFunctions.getGeoAltitude(matchingData);
         chartData.labels = Array.from({ length: data_array.length }, (_, i) => (i*10).toString());
         chartData.datasets[0].label = "Geo Altitude - Time";
         chartData.datasets[0].data = data_array;
+        yAxisText = "Geo Altitude";
     }
     else if(selectedGraph === "Latitude - Time"){
         const data_array = allFunctions.getLatitude(matchingData);
         chartData.labels = Array.from({ length: data_array.length }, (_, i) => (i*10).toString());
         chartData.datasets[0].label = "Latitude - Time";
         chartData.datasets[0].data = data_array;
+        yAxisText = "Latitude";
     }
     else if(selectedGraph === "Longitude - Time"){
         const data_array = allFunctions.getLongitude(matchingData);
         chartData.labels = Array.from({ length: data_array.length }, (_, i) => (i*10).toString());
         chartData.datasets[0].label = "Longitude - Time";
         chartData.datasets[0].data = data_array;
+        yAxisText = "Longitude";
     }
     else if(selectedGraph === "True Track - Time"){
         const data_array = allFunctions.getTrueTrack(matchingData);
         chartData.labels = Array.from({ length: data_array.length }, (_, i) => (i*10).toString());
         chartData.datasets[0].label = "True Track - Time";
         chartData.datasets[0].data = data_array;
+        yAxisText = "True Track";
     }
     else if(selectedGraph === "Velocity - Time"){
         const data_array = allFunctions.getVelocity(matchingData);
         chartData.labels = Array.from({ length: data_array.length }, (_, i) => (i*10).toString());
         chartData.datasets[0].label = "Velocity - Time";
         chartData.datasets[0].data = data_array;
+        yAxisText = "Velocity";
     }
     else if(selectedGraph === "Vertical Rate - Time"){
         const data_array = allFunctions.getVerticalRate(matchingData);
         chartData.labels = Array.from({ length: data_array.length }, (_, i) => (i*10).toString());
         chartData.datasets[0].label = "Vertical Rate - Time";
         chartData.datasets[0].data = data_array;
+        yAxisText = "Vertical Rate";
     }
 
     var myChart = new Chart(ctx, {
@@ -60,10 +69,41 @@ function createChart(selectedGraph, matchingData) {
         data: chartData,
         options: {
             scales: {
+                x: {
+                
+                    type: 'linear',
+                    ticks: {
+                        stepSize: 0.0001,
+                        precision: 4 // Adjust precision for the x-axis ticks
+                    },
+                    title: {
+
+                        display: true,
+    
+                        text: "Time"
+    
+                    }
+                    
+                },
                 y: {
-                    beginAtZero: true
+                    type: 'linear',
+                    ticks: {
+                        stepSize: 0.0001,
+                        precision: 4 // Adjust precision for the y-axis ticks
+                    },
+                    title: {
+
+                        display: true,
+    
+                        text: yAxisText
+    
+                    }
+
+                    
+                    
                 }
-            }
+            },
+            
         }
     });
 
