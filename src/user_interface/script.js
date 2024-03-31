@@ -150,7 +150,45 @@ function printOnScreen2(content) {
 }*/
 
 
+// Function to display plane properties
+// Function to display plane properties
+function displayPlaneProperties(callsign) {
+    const planeData = allFunctions.findMatchingCallsignData(planesData_tmp, callsign);
+    const propertiesDiv = document.getElementById('planeProperties');
+    propertiesDiv.innerHTML = ''; // Clear previous content
+    if (planeData) {
+        // Construct the properties HTML
+        const propertiesHTML = `
+            <h2>${callsign} Properties:</h2>
+            <p><strong>Origin Country:</strong> ${allFunctions.getOriginCountry(planeData)}</p>
+            <p><strong>icao24:</strong> ${allFunctions.getIcao(planeData)[0]}</p>
+            <p><strong>Time Position:</strong> ${allFunctions.getTimePosition(planeData)[0]}</p>
+            <p><strong>True Track:</strong> ${allFunctions.getTrueTrack(planeData)[0]}</p>
+        `;
+        // Display the properties HTML
+        propertiesDiv.innerHTML = propertiesHTML;
+    } else {
+        // If no data found for the selected callsign
+        propertiesDiv.textContent = "No data found for the selected plane.";
+    }
+}
 
+planeList.addEventListener('click', (event) => {
+    selectedCallsign = event.target.textContent;
+    printOnScreen(selectedCallsign);
+    planeInput.placeholder = `${selectedCallsign}`;
+    validProperties = allFunctions.getValidProperties(allFunctions.findMatchingCallsignData(planesData_tmp, selectedCallsign));
+    displayGraphsSelection(validProperties);
+
+    // Display plane properties
+    displayPlaneProperties(selectedCallsign); // Add this line
+
+    /*const selectedPlaneId = event.target.getAttribute('data-id');
+    if (selectedPlaneId) {
+        // Redirect to the page with selected plane data
+        window.location.href = `plane-info.html?id=${selectedPlaneId}`;
+    }*/
+});
 
 
 

@@ -158,6 +158,7 @@ nav{
 }
 .logo figure{
     width: 20 px;
+    margin-left: 100 px;
 }
 
 .nav-links{
@@ -172,10 +173,18 @@ nav{
 }
 .select-plane img {
     vertical-align: center ; /* Align the image vertically with text */
-    margin-left: 10px; /* Add some spacing between text and image */
+    margin-left: 1000 px; /* Add some spacing between text and image */
 }
 
 .nav-links ul li a{
     color: #fff;
     text-decoration: none;
+}
+.plane-properties {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid #ccc;
 }
