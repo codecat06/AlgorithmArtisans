@@ -184,7 +184,35 @@ nav{
     position: fixed;
     bottom: 10px;
     left: 10px;
-    background-color: #ffffff;
+}
+
+.property-box {
+    width: calc(100% - 20px); /* Adjusted width */
+    margin-bottom: 10px; /* Added margin between boxes */
     padding: 10px;
+    background-color: #ffffff;
     border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.property-box {
+    width: 100%; /* Each box takes up the full width of its container */
+    margin-bottom: 10px; /* Add some spacing between the boxes */
+}
+
+/* Adjust the width and padding of the text inside property boxes */
+.property-box p {
+    padding: 10px;
+    font-size: 25px;
+}
+
+/* Adjust the font size of strong elements */
+.property-box strong {
+    font-size: 35px; /* Adjust as needed */
+}
+
+/* Ensure spans inside property boxes fill the entire width */
+.property-box span {
+    width: 100%;
+    display: inline-block;
 }
