@@ -154,22 +154,15 @@ function printOnScreen2(content) {
 // Function to display plane properties
 function displayPlaneProperties(callsign) {
     const planeData = allFunctions.findMatchingCallsignData(planesData_tmp, callsign);
-    const propertiesDiv = document.getElementById('planeProperties');
-    propertiesDiv.innerHTML = ''; // Clear previous content
     if (planeData) {
-        // Construct the properties HTML
-        const propertiesHTML = `
-            <h2>${callsign} Properties:</h2>
-            <p><strong>Origin Country:</strong> ${allFunctions.getOriginCountry(planeData)}</p>
-            <p><strong>icao24:</strong> ${allFunctions.getIcao(planeData)[0]}</p>
-            <p><strong>Time Position:</strong> ${allFunctions.getTimePosition(planeData)[0]}</p>
-            <p><strong>True Track:</strong> ${allFunctions.getTrueTrack(planeData)[0]}</p>
-        `;
-        // Display the properties HTML
-        propertiesDiv.innerHTML = propertiesHTML;
+        // Set innerHTML of each property span with corresponding value
+        document.getElementById('originCountry').innerHTML = allFunctions.getOriginCountry(planeData);
+        document.getElementById('icao').innerHTML = allFunctions.getIcao(planeData)[0];
+        document.getElementById('onGround').innerHTML = allFunctions.getOnGround(planeData)[0];
+        document.getElementById('category').innerHTML = allFunctions.getCategory(planeData)[0];
     } else {
         // If no data found for the selected callsign
-        propertiesDiv.textContent = "No data found for the selected plane.";
+        console.log("No data found for the selected plane.");
     }
 }
 
@@ -189,6 +182,8 @@ planeList.addEventListener('click', (event) => {
         window.location.href = `plane-info.html?id=${selectedPlaneId}`;
     }*/
 });
+
+
 
 
 

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aircraft Information</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="../data_retrieving/PlaneData.js"></script>
 </head>
 
 <body>
@@ -19,7 +20,7 @@
     <div class="main"></div>
     <nav>
         <div class="logo">
-                <img src="../../../figure.png">
+                <img src="../../../figure.pngd">
         </div>
             <div class="nav-links">
                 <ul>
@@ -49,7 +50,20 @@
     <button id="upperButton">Go to Graph</button> <!-- Button placed above group-info -->
 </div>
 
-<div id="planeProperties" class="plane-properties"></div>
+<div class="plane-properties">
+    <div class="property-box">
+        <p><strong style="font-size: 14px;">Origin Country:</strong> <span id="originCountry"></span></p>
+    </div>
+    <div class="property-box">
+        <p><strong style="font-size: 14px;">icao24:</strong> <span id="icao"></span></p>
+    </div>
+    <div class="property-box">
+        <p><strong style="font-size: 14px;">On Ground:</strong> <span id="onGround"></span></p>
+    </div>
+    <div class="property-box">
+        <p><strong style="font-size: 14px;">Category:</strong> <span id="category"></span></p>
+    </div>
+</div>
 
 <footer>
 
