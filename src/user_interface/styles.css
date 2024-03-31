@@ -139,3 +139,43 @@ footer {
     font-size: 100px; /* Set the font size of the button text */
 
 }
+
+nav{
+    width: 80%;
+    position: sticky;
+    margin: 20px auto;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+}
+.logo img {
+    width: 200px; /* Adjust logo size as needed */
+}
+
+.logo{
+    flex-basis: 20%;
+
+}
+.logo figure{
+    width: 20 px;
+}
+
+.nav-links{
+    flex:1;
+    text-align: right;
+}
+
+.nav-links ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+}
+.select-plane img {
+    vertical-align: center ; /* Align the image vertically with text */
+    margin-left: 10px; /* Add some spacing between text and image */
+}
+
+.nav-links ul li a{
+    color: #fff;
+    text-decoration: none;
+}
