@@ -107,6 +107,19 @@ function createChart(selectedGraph, matchingData) {
         }
     });
 
+    // event listener for Google Maps
+    myChart.canvas.addEventListener('click', function(evt) {
+        const points = myChart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
+        if (points.length) {
+            var index = points[0].index;
+            var latitude = allFunctions.getLatitude(matchingData)[index];
+            var longitude = allFunctions.getLongitude(matchingData)[index];
+            var googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+            var mapWindow = window.open(googleMapsUrl, '_blank');
+        }
+    });
+
+
 }
 
 // Retrieve the selectedGraph value from the URL query parameters
