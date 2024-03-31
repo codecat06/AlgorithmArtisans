@@ -1,0 +1,5 @@
+body #myChart {
+    width: 50%; /* Set width to 50% of the screen */
+    height: auto; /* Let height adjust proportionally */
+    padding: 20px;
+}
