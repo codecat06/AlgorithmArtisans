@@ -181,7 +181,7 @@ nav{
     text-decoration: none;
 }
 .plane-properties {
-
+    
     position: fixed;
 
     bottom: 10px;
@@ -189,7 +189,7 @@ nav{
     left: 10px;
 
     display: flex;
-
+    visibility: hidden;
     justify-content: space-between;
 
 }

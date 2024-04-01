@@ -172,7 +172,11 @@ planeList.addEventListener('click', (event) => {
     planeInput.placeholder = `${selectedCallsign}`;
     validProperties = allFunctions.getValidProperties(allFunctions.findMatchingCallsignData(planesData_tmp, selectedCallsign));
     displayGraphsSelection(validProperties);
+    // Access the element with the class 'plane-properties'
+    const planeProperties = document.querySelector('.plane-properties');
 
+// Set the visibility to 'hidden'
+    planeProperties.style.visibility = 'visible';
     // Display plane properties
     displayPlaneProperties(selectedCallsign); // Add this line
 
