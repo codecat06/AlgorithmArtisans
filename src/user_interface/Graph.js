@@ -132,9 +132,9 @@ document.addEventListener('DOMContentLoaded', function() {
     allFunctions.loadPlanesDataFromFile("../data_retrieving/planes.txt")
         .then(planesData => {
             const matchingData = allFunctions.findMatchingCallsignData(planesData, selectedCallSign);
-            createChart(selectedGraph, matchingData, selectedCallSign);
+            createChart(selectedGraph, matchingData);
         })
-    // Call createChart with the retrieved selectedGraph value
+
 
 });
 
