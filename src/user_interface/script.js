@@ -117,40 +117,6 @@ function printOnScreen2(content) {
 }
 
 
-/*function displayGraph(selectedCallsign, selectedGraph){
-
-
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'line', // Change this to the type of chart you want (bar, line, pie, etc.)
-        data: {
-            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-            datasets: [{
-                label: 'x',
-                data: [12, 19, 3, 5, 2, 3, 9, 20, 15, 16],
-                backgroundColor: [
-                    'black'
-                ],
-                borderColor: 'black',
-                borderWidth: 4
-
-            }]
-
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-
-
-}*/
-
-
-// Function to display plane properties
 // Function to display plane properties
 function displayPlaneProperties(callsign) {
     const planeData = allFunctions.findMatchingCallsignData(planesData_tmp, callsign);
@@ -166,12 +132,83 @@ function displayPlaneProperties(callsign) {
     }
 }
 
+
+
+// Function to display the map of last two locations of the selected callsign
+function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 0, lng: 0 },
+        zoom: 300
+    });
+
+    allFunctions.loadPlanesDataFromFile("../data_retrieving/planes.txt")
+        .then(planesData => {
+            var matchingData = allFunctions.findMatchingCallsignData(planesData, selectedCallsign);
+
+            const lat_arr = allFunctions.getLatitude(matchingData);
+            const lng_arr = allFunctions.getLongitude(matchingData);
+            var lat1 = Number(lat_arr[lat_arr.length - 1]);
+            var lng1 = Number(lng_arr[lng_arr.length - 1]);
+            var lat2 = Number(lat_arr[lat_arr.length - 2]);
+            var lng2 = Number(lng_arr[lng_arr.length - 2]);
+            var location1 = { lat: lat1, lng: lng1 };
+            var location2 = { lat: lat2, lng: lng2 };
+
+            var marker1 = new google.maps.Marker({
+                position: location1,
+                map: map,
+                title: 'Location 1'
+            });
+
+            var marker2 = new google.maps.Marker({
+                position: location2,
+                map: map,
+                title: 'Location 2'
+            });
+
+            var midpoint = {
+                lat: (location1.lat + location2.lat) / 2,
+                lng: (location1.lng + location2.lng) / 2
+            };
+
+            // Calculate the bearing between the two locations
+            var bearing = google.maps.geometry.spherical.computeHeading(marker1.getPosition(), marker2.getPosition());
+
+            // Create a symbol for the plane icon
+            var planeSymbol = {
+                path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                scale: 4,
+                fillColor: 'blue',
+                fillOpacity: 0.8,
+                strokeWeight: 2,
+                rotation: bearing // Set the rotation of the symbol to the bearing between the two locations
+            };
+
+            var planeMarker = new google.maps.Marker({
+                position: midpoint,
+                map: map,
+                icon: planeSymbol,
+                title: 'Plane'
+            });
+
+            var bounds = new google.maps.LatLngBounds();
+            bounds.extend(marker1.getPosition());
+            bounds.extend(marker2.getPosition());
+            map.fitBounds(bounds);
+        });
+}
+
+
+
+
+
 planeList.addEventListener('click', (event) => {
     selectedCallsign = event.target.textContent;
     printOnScreen(selectedCallsign);
     planeInput.placeholder = `${selectedCallsign}`;
     validProperties = allFunctions.getValidProperties(allFunctions.findMatchingCallsignData(planesData_tmp, selectedCallsign));
     displayGraphsSelection(validProperties);
+
     // Access the element with the class 'plane-properties'
     const planeProperties = document.querySelector('.plane-properties');
 
@@ -179,6 +216,8 @@ planeList.addEventListener('click', (event) => {
     planeProperties.style.visibility = 'visible';
     // Display plane properties
     displayPlaneProperties(selectedCallsign); // Add this line
+
+    initMap();
 
     /*const selectedPlaneId = event.target.getAttribute('data-id');
     if (selectedPlaneId) {

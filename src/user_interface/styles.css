@@ -64,16 +64,20 @@ main {
     background-color: #e5e5e5;
 
 }
-
-footer {
-    background-color: #ba1b1b;
+.group-info {
+    background-color: white;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: #fff;
+    color: red;
     padding: 10px;
-    position: fixed;
-    bottom: 0;
-    right: 0;
+    position: relative;
+    bottom: 375px; /* Adjust as needed */
+    left: calc(95% + 10px); /* Adjust as needed */
+    transform: translateX(-50%);
+    width: 250px; /* Set the width of the button */
+    height: 250px; /* Set the height of the button */
+    font-size: 20px; /* Set the font size of the button text */
 }
+
 
 .group-name {
     font-size: 24px; /* Adjusted font size */
@@ -81,9 +85,9 @@ footer {
 
 .graph-selection {
     width: 300px;
-    position: fixed;
-    bottom: 20px;
-    left: calc(75% + 10px); /* Adjust as needed */
+    position: relative;
+    bottom: 0px;
+    left: calc(80% + 10px); /* Adjust as needed */
     transform: translateX(-50%);
 }
 
@@ -131,12 +135,13 @@ footer {
 
 .button{
 
-    position: fixed;
-    bottom: 250px;
-    right: 0;
-    width: 150px; /* Set the width of the button */
-    height: 50px; /* Set the height of the button */
-    font-size: 100px; /* Set the font size of the button text */
+    position: relative;
+    bottom: 300px;
+    left: calc(95% + 10px); /* Adjust as needed */
+    transform: translateX(-50%);
+    width: 10px; /* Set the width of the button */
+    height: 10px; /* Set the height of the button */
+    font-size: 20px; /* Set the font size of the button text */
 
 }
 
@@ -182,9 +187,9 @@ nav{
 }
 .plane-properties {
     
-    position: fixed;
-
-    bottom: 10px;
+    position: relative;
+    width: 500px;
+    bottom: 85px;
 
     left: 10px;
 
@@ -195,7 +200,7 @@ nav{
 }
 
 .property-box {
-    width: calc(8%); /* Adjusted width */
+    width: 100%; /* Adjusted width */
     margin-bottom: 10px; /* Added margin between boxes */
     padding: 10px;
     background-color: #ffffff;
@@ -203,10 +208,7 @@ nav{
     box-sizing: border-box;
 }
 
-.property-box {
-    width: 100%; /* Each box takes up the full width of its container */
-    margin-bottom: 10px; /* Add some spacing between the boxes */
-}
+
 
 /* Adjust the width and padding of the text inside property boxes */
 .property-box p {
@@ -224,6 +226,18 @@ nav{
     width: 50%;
     display: inline-block;
 }
+
+
+#map {
+    position: relative; /* Set position to relative */
+    bottom: 750px; /* Reset bottom property */
+    width: 500px; /* Set the width of the map */
+    height: 250px;
+    left: 10px; /* Set a height for the map */
+    z-index: 1000; /* Ensure it appears above other content */
+}
+
+
 
 
 
