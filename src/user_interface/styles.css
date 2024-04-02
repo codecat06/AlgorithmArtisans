@@ -227,6 +227,14 @@ nav{
     display: inline-block;
 }
 
+#map {
+    height: 200px; /* Set a height for the map */
+    width: 100px;
+    margin-top: 200px; /* Add some margin to separate the map from the property boxes */
+}
+
+
+
 
 #map {
     position: relative; /* Set position to relative */
