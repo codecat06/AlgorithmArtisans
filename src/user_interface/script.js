@@ -138,7 +138,6 @@ function displayPlaneProperties(callsign) {
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 0, lng: 0 },
-        zoom: 300
     });
 
     allFunctions.loadPlanesDataFromFile("../data_retrieving/planes.txt")
@@ -154,25 +153,8 @@ function initMap() {
             var location1 = { lat: lat1, lng: lng1 };
             var location2 = { lat: lat2, lng: lng2 };
 
-            var marker1 = new google.maps.Marker({
-                position: location1,
-                map: map,
-                title: 'Location 1'
-            });
-
-            var marker2 = new google.maps.Marker({
-                position: location2,
-                map: map,
-                title: 'Location 2'
-            });
-
-            var midpoint = {
-                lat: (location1.lat + location2.lat) / 2,
-                lng: (location1.lng + location2.lng) / 2
-            };
-
             // Calculate the bearing between the two locations
-            var bearing = google.maps.geometry.spherical.computeHeading(marker1.getPosition(), marker2.getPosition());
+            var bearing = google.maps.geometry.spherical.computeHeading(location1, location2);
 
             // Create a symbol for the plane icon
             var planeSymbol = {
@@ -184,17 +166,17 @@ function initMap() {
                 rotation: bearing // Set the rotation of the symbol to the bearing between the two locations
             };
 
-            var planeMarker = new google.maps.Marker({
-                position: midpoint,
+            var marker1 = new google.maps.Marker({
+                position: location1,
                 map: map,
-                icon: planeSymbol,
-                title: 'Plane'
+                title: 'Last Location',
+                icon: planeSymbol
             });
 
             var bounds = new google.maps.LatLngBounds();
             bounds.extend(marker1.getPosition());
-            bounds.extend(marker2.getPosition());
             map.fitBounds(bounds);
+            map.setZoom(12)
         });
 }
 
