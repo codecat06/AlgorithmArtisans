@@ -34,6 +34,7 @@ async function loadPlanesDataFromFile(filename) {
     const planesData = text.split('\n').filter(line => line.trim().length > 0).map(JSON.parse);
   
     return planesData;
+   
   
 }
 

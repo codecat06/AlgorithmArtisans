@@ -81,6 +81,8 @@ def print_matching_callsign_data(matching_data):
         print("")
 
 
+
+
 # # initial planes.txt
 # save_planes_data_to_file("planes.txt")
 # time.sleep(10)
@@ -91,7 +93,11 @@ def print_matching_callsign_data(matching_data):
 # save_planes_data_to_file("planes.txt")
 # time.sleep(10)
 # save_planes_data_to_file("planes.txt")
+while True:
 
+    save_planes_data_to_file("planes.txt")
+    planes_data = load_planes_data_from_file("planes.txt")
+    time.sleep(10)
 
 # printing all properties of given lines
 planes_data = load_planes_data_from_file("planes.txt")
