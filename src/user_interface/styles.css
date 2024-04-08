@@ -126,11 +126,12 @@ main {
 }
 
 #output, #output2 {
-    display: 0; 
+    display: none;
     width: 50%;
     vertical-align: top;
     padding: 5px;
     box-sizing: border-box;
+    visibility: hidden;
 }
 
 .button{
